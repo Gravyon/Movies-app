@@ -1,0 +1,42 @@
+.card_content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 200px;
+    margin: 8px 0;
+    border-radius: 10px;
+    background-color: #212931;
+    padding: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card_content:hover {
+    background-color: white;
+    color: black;
+}
+
+@media (max-width: 550px) {
+    .card_content {
+        width: 46%;
+    }
+}
+
+.image {
+    border-radius: 10px;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+    padding: 8px 0;
+    font-weight: bold;
+}
+
+.subtitle {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 3px;
+    padding: 0 2px;
+    padding-top: 3px;
+}
