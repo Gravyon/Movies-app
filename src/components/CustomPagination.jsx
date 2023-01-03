@@ -1,15 +1,32 @@
-import { Pagination } from "@mui/material";
+import { Pagination, createTheme } from "@mui/material";
+import { Context } from "../store/appContext";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const CustomPagination = () => {
-  const handlePageChange = (page) => {
-    setPage(page);
+const CustomPagination = ({ numOfPages = 10 }) => {
+  const { store, actions } = useContext(Context);
+
+  const handlePagination = async (page) => {
+    await actions.getTrending(page);
     window.scrollTo(0, 0);
   };
+
   return (
-    <Pagination
-      count={10}
-      onChange={(e) => handlePageChange(e.target.textContent)}
-    />
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        marginTop: 10,
+      }}
+    >
+      <Pagination
+        color="primary"
+        count={numOfPages}
+        defaultPage={0}
+        onChange={(e) => handlePagination(e.target.textContent)}
+      />
+    </div>
   );
 };
 
