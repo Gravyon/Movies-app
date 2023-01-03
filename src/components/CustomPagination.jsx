@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 const CustomPagination = ({ numOfPages = 10 }) => {
   const { store, actions } = useContext(Context);
 
-  const handlePagination = async (page) => {
-    await actions.getTrending(page);
+  const handlePagination = (page) => {
     window.scrollTo(0, 0);
+    actions.getTrending(page);
   };
 
   return (
@@ -23,7 +23,7 @@ const CustomPagination = ({ numOfPages = 10 }) => {
       <Pagination
         color="primary"
         count={numOfPages}
-        defaultPage={0}
+        defaultPage={1}
         onChange={(e) => handlePagination(e.target.textContent)}
       />
     </div>
