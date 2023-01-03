@@ -2,15 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Single from "../components/Single";
 import "./Trending.css";
+import CustomPagination from "../components/CustomPagination";
 
 const Trending = () => {
+  const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
+
   async function getTrending() {
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/trending/all/day?api_key=${
           import.meta.env.VITE_APP_API_KEY
-        }`
+        }&page=${page}`
       );
       // console.log(response.data);
       setContent(response.data.results);
@@ -22,7 +25,7 @@ const Trending = () => {
 
   useEffect(() => {
     getTrending();
-  }, []);
+  }, [page]);
 
   return (
     <div>
@@ -40,6 +43,7 @@ const Trending = () => {
           />
         ))}
       </div>
+      <CustomPagination setPage={setPage} />
     </div>
   );
 };
