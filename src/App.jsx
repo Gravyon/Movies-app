@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Container } from "@mui/material";
+import injectContext from "./store/appContext";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/MainNav";
@@ -27,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default injectContext(App);
