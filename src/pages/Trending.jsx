@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext } from "react";
 import Single from "../components/Single";
 import "./Trending.css";
 import CustomPagination from "../components/CustomPagination";
 import { Context } from "../store/appContext";
 
 const Trending = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
 
   return (
     <div>

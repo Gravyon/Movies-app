@@ -20,7 +20,8 @@ const injectContext = (PassedComponent) => {
 
     useEffect(() => {
       state.actions.getTrending();
-    }, [state.store.pageNum]);
+      state.actions.getMovies();
+    }, []);
 
     return (
       <Context.Provider value={state}>
