@@ -15,6 +15,7 @@ export default function SimpleBottomNavigation() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scroll(0, 0);
     if (value === 0) navigate("/");
     else if (value === 1) navigate("/movies");
     else if (value === 2) navigate("/series");

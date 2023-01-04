@@ -21,6 +21,7 @@ const injectContext = (PassedComponent) => {
     useEffect(() => {
       state.actions.getTrending();
       state.actions.getMovies();
+      state.actions.getSeries();
     }, []);
 
     return (

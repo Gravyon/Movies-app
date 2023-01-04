@@ -5,6 +5,9 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       trending: [],
       movies: [],
+      series: [],
+      content: [],
+      filtered: [],
     },
     actions: {
       getTrending: async (page) => {
@@ -20,9 +23,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           // const data = await response.json();
           console.log("Trending");
           console.log(response.data.results);
-          // console.log(page);
-          setStore({ trending: response.data.results });
-          return page;
+          setStore({
+            trending: response.data.results,
+          });
+          return true;
         } catch (error) {
           console.error(error);
         }
@@ -43,7 +47,28 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(response.data);
           // console.log(page);
           setStore({ movies: response.data.results });
-          return page;
+          return true;
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      getSeries: async (page) => {
+        if (page === undefined) {
+          page = 1;
+        }
+        try {
+          const response = await axios.get(
+            `https://api.themoviedb.org/3/discover/tv?api_key=${
+              import.meta.env.VITE_APP_API_KEY
+            }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
+            // &with_genres=${genreforURL}`
+          );
+          // const data = await response.json();
+          console.log("Series");
+          console.log(response.data);
+          // console.log(page);
+          setStore({ series: response.data.results });
+          return true;
         } catch (error) {
           console.error(error);
         }
@@ -53,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         let results = store.trending.filter((item) => {
           console.log(item);
           if (
-            item.title
+            item.name
               .toString()
               .toLowerCase()
               .includes(searchValue.toLowerCase()) ||
@@ -70,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
         setStore({
-          trending: results,
+          filtered: results,
         });
       },
     },

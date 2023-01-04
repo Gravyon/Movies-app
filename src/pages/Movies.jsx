@@ -1,11 +1,24 @@
 import { useContext } from "react";
 import Single from "../components/Single";
-import "./Trending.css";
-import CustomPagination from "../components/CustomPagination";
+import "./styles.css";
 import { Context } from "../store/appContext";
+import { Pagination } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const Movies = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
+
+  const handlePagination = async (page) => {
+    window.scroll(0, 0);
+    await actions.getMovies(page);
+  };
 
   return (
     <div>
@@ -23,7 +36,25 @@ const Movies = () => {
           />
         ))}
       </div>
-      <CustomPagination />
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 10,
+          color: "white",
+        }}
+      >
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Pagination
+            count={500}
+            onChange={(e) => handlePagination(e.target.textContent)}
+            hideNextButton
+            hidePrevButton
+          />
+        </ThemeProvider>
+      </div>
     </div>
   );
 };
