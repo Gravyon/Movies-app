@@ -22,6 +22,11 @@ const injectContext = (PassedComponent) => {
       state.actions.getTrending();
       state.actions.getMovies();
       state.actions.getSeries();
+      state.actions.getGenres();
+      //Dismounting component
+      return () => {
+        state.actions.getGenres({});
+      };
     }, []);
 
     return (

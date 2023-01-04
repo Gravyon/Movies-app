@@ -7,7 +7,9 @@ const Single = ({ id, poster, title, date, media_type, vote_average }) => {
   return (
     <Card className="card_content" key={id} style={{ width: "18rem" }}>
       <Badge
-        badgeContent={vote_average.toString().split(".")[0]}
+        badgeContent={
+          vote_average > 0 ? vote_average.toString().slice(0, 3) : "1"
+        }
         color={vote_average > 6 ? "success" : "secondary"}
       />
       <Card.Img

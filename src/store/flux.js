@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       series: [],
       content: [],
       filtered: [],
+      genres: [],
     },
     actions: {
       getTrending: async (page) => {
@@ -20,7 +21,6 @@ const getState = ({ getStore, getActions, setStore }) => {
               import.meta.env.VITE_APP_API_KEY
             }&page=${page}}`
           );
-          // const data = await response.json();
           console.log("Trending");
           console.log(response.data.results);
           setStore({
@@ -42,7 +42,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
             // &with_genres=${genreforURL}`
           );
-          // const data = await response.json();
           console.log("Movies");
           console.log(response.data);
           // console.log(page);
@@ -63,11 +62,25 @@ const getState = ({ getStore, getActions, setStore }) => {
             }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
             // &with_genres=${genreforURL}`
           );
-          // const data = await response.json();
           console.log("Series");
           console.log(response.data);
-          // console.log(page);
           setStore({ series: response.data.results });
+          return true;
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      getGenres: async () => {
+        try {
+          const response = await axios.get(
+            `https://api.themoviedb.org/3/genre/movie/list?api_key=${
+              import.meta.env.VITE_APP_API_KEY
+            }&language=en-US`
+          );
+          console.log("Genres");
+          console.log(response.data);
+          // console.log(page);
+          setStore({ genres: response.data.genres });
           return true;
         } catch (error) {
           console.error(error);
@@ -75,7 +88,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       filterSearch: (searchValue) => {
         let store = getStore();
-        let results = store.trending.filter((item) => {
+        let content = store.content;
+        content = [store.trending, store.series, store.movies];
+        console.log(content);
+        let results = content.filter((item) => {
           console.log(item);
           if (
             item.name
@@ -94,6 +110,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             return item;
           }
         });
+        console.log(store.filtered);
         setStore({
           filtered: results,
         });
