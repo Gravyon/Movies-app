@@ -119,33 +119,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           store.genres
         );
       },
-      // addGenre: (genre) => {
-      //   const store = getStore();
-      //   if (store.genres.includes(genre)) {
-      //     getActions().removeGenre(genre);
-      // setStore({
-      //   genres: store.genres.filter((item) => item.id !== genre.id),
-      // });
-      //     setStore({
-      //       filteredGenres: [...store.genres, genre],
-      //     });
-      //     console.log(store.filteredGenres, "filteredGenres");
-      //     return;
-      //   }
-      //   console.log("genrepicker", genre.id);
-      // },
-      // removeGenre: (genre) => {
-      //   const store = getStore();
-      //   setStore({
-      //     genres: store.genres.filter((item) => item.id !== genre.id),
-      //   });
-      //   setStore({
-      //     genres: [...store.genres, genre],
-      //   });
-      // setStore([...store.genres, genre]);
-      //   console.log(store.genres);
-      //   console.log("filtrado");
-      // },
       filterSearch: (searchValue) => {
         let store = getStore();
         let content = store.content;
