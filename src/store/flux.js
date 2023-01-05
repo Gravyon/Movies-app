@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       content: [],
       filtered: [],
       genres: [],
+      filteredGenres: [],
     },
     actions: {
       getTrending: async (page) => {
@@ -32,9 +33,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       getMovies: async (page) => {
-        if (page === undefined) {
-          page = 1;
-        }
+        // if (page === undefined) {
+        //   page = 1;
+        // }
         try {
           const response = await axios.get(
             `https://api.themoviedb.org/3/discover/movie?api_key=${
@@ -52,9 +53,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       getSeries: async (page) => {
-        if (page === undefined) {
-          page = 1;
-        }
+        // if (page === undefined) {
+        //   page = 1;
+        // }
         try {
           const response = await axios.get(
             `https://api.themoviedb.org/3/discover/tv?api_key=${
@@ -86,6 +87,65 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error(error);
         }
       },
+      addGenre: (genre) => {
+        const store = getStore();
+        setStore({ filteredGenres: [...store.filteredGenres, genre] });
+        setStore({
+          genres: store.genres.filter((item) => item.id !== genre.id),
+        });
+        // console.log(store.genres);
+        console.log(
+          "addgenre",
+          "filtered",
+          store.filteredGenres,
+          "genres",
+          store.genres
+        );
+      },
+      removeGenre: (genre) => {
+        const store = getStore();
+        setStore({ genres: [...store.genres, genre] });
+        setStore({
+          filteredGenres: store.filteredGenres.filter(
+            (filtered) => filtered.id !== genre.id
+          ),
+        });
+
+        console.log(
+          "removegenre",
+          "filtered",
+          store.filteredGenres,
+          "genres",
+          store.genres
+        );
+      },
+      // addGenre: (genre) => {
+      //   const store = getStore();
+      //   if (store.genres.includes(genre)) {
+      //     getActions().removeGenre(genre);
+      // setStore({
+      //   genres: store.genres.filter((item) => item.id !== genre.id),
+      // });
+      //     setStore({
+      //       filteredGenres: [...store.genres, genre],
+      //     });
+      //     console.log(store.filteredGenres, "filteredGenres");
+      //     return;
+      //   }
+      //   console.log("genrepicker", genre.id);
+      // },
+      // removeGenre: (genre) => {
+      //   const store = getStore();
+      //   setStore({
+      //     genres: store.genres.filter((item) => item.id !== genre.id),
+      //   });
+      //   setStore({
+      //     genres: [...store.genres, genre],
+      //   });
+      // setStore([...store.genres, genre]);
+      //   console.log(store.genres);
+      //   console.log("filtrado");
+      // },
       filterSearch: (searchValue) => {
         let store = getStore();
         let content = store.content;

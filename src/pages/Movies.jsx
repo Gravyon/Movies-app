@@ -21,24 +21,10 @@ const darkTheme = createTheme({
 
 const Movies = () => {
   const { store, actions } = useContext(Context);
-  const [selectedGenres, setSelectedGenres] = useState([]);
-  const [genreFilter, setGenreFilter] = useState([]);
-  // console.log(store.genres);
-  // setGenreFilter(store.genres);
+
   const handlePagination = async (page) => {
     window.scroll(0, 0);
     await actions.getMovies(page);
-  };
-
-  // useEffect(() => {
-  //   actions.getGenres();
-  // }, []);
-
-  const handleGenreFilter = (genre) => {
-    setSelectedGenres([...selectedGenres, genre]);
-    setGenreFilter(store.genres.filter((item) => item.id !== item.id));
-    // console.log(selectedGenres);
-    console.log(genreFilter);
   };
 
   return (
@@ -47,7 +33,7 @@ const Movies = () => {
         <CssBaseline />
         <div className="pageTitle">Movies</div>
         <div style={{ padding: "6px 0" }}>
-          {selectedGenres.map((genre) => (
+          {store.filteredGenres.map((genre) => (
             <Chip
               clickable
               size="small"
@@ -55,6 +41,7 @@ const Movies = () => {
               label={genre.name}
               style={{ margin: 2 }}
               color="primary"
+              onClick={() => actions.removeGenre(genre)}
             />
           ))}
           {store.genres.map((genre) => (
@@ -64,7 +51,7 @@ const Movies = () => {
               key={genre.id}
               label={genre.name}
               style={{ margin: 2 }}
-              onClick={() => handleGenreFilter(genre)}
+              onClick={() => actions.addGenre(genre)}
             />
           ))}
         </div>
