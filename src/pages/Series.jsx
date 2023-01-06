@@ -3,14 +3,6 @@ import Single from "../components/Single";
 import "./styles.css";
 import { Context } from "../store/appContext";
 import { Pagination } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 
 const Series = () => {
   const { store, actions } = useContext(Context);
@@ -45,15 +37,12 @@ const Series = () => {
           color: "white",
         }}
       >
-        <ThemeProvider theme={darkTheme}>
-          <CssBaseline />
-          <Pagination
-            count={500}
-            onChange={(e) => handlePagination(e.target.textContent)}
-            hideNextButton
-            hidePrevButton
-          />
-        </ThemeProvider>
+        <Pagination
+          count={500}
+          onChange={(e) => handlePagination(e.target.textContent)}
+          hideNextButton
+          hidePrevButton
+        />
       </div>
     </div>
   );

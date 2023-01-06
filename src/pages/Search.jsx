@@ -1,22 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import Series from "./Series";
-import Movies from "./Movies";
-import { Container } from "@mui/system";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+import { Button, Tab, Tabs } from "@mui/material";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 const Search = () => {
   const { store, actions } = useContext(Context);
   const [search, setSearch] = useState("");
+  const [type, setType] = useState(0);
 
   const handleInput = (e) => {
     setSearch(e.target.value);
@@ -32,29 +23,36 @@ const Search = () => {
   return (
     <div>
       <span className="pageTitle">Search</span>
-      <form>
-        <ThemeProvider theme={darkTheme}>
-          <CssBaseline />
-          <TextField
-            style={{ color: "white", alignContent: "center" }}
-            onChange={handleInput}
-            id="search-bar"
-            className="text"
-            variant="outlined"
-            placeholder="Search..."
-            size="small"
-          />
-          <IconButton type="submit" aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </ThemeProvider>
-      </form>
-      <div className="results">
-        <Container>
-          <Series />
-          <Movies />
-        </Container>
+      <div style={{ display: "flex", margin: "15px 0" }}>
+        <TextField
+          style={{ flex: 1 }}
+          onChange={handleInput}
+          className="searchBox"
+          variant="filled"
+          placeholder="Search..."
+        />
+        <Button
+          variant="contained"
+          style={{ marginLeft: 10 }}
+          type="submit"
+          aria-label="search"
+        >
+          <SearchIcon />
+        </Button>
       </div>
+      <Tabs
+        value={type}
+        indicatorColor="primary"
+        textColor="primary"
+        onChange={(event, newValue) => {
+          setType(newValue);
+        }}
+        style={{ paddingBottom: 5 }}
+      >
+        <Tab style={{ width: "50%" }} label="Search Movies" />
+        <Tab style={{ width: "50%" }} label="Search TV Series" />
+      </Tabs>
+      <div className="results"></div>
     </div>
   );
 };

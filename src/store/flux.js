@@ -1,4 +1,5 @@
 import axios from "axios";
+import useGenre from "../hooks/useGenre";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -10,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       filtered: [],
       genres: [],
       filteredGenres: [],
+      total_pages: 0,
     },
     actions: {
       getTrending: async (page) => {
@@ -22,8 +24,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               import.meta.env.VITE_APP_API_KEY
             }&page=${page}}`
           );
-          console.log("Trending");
-          console.log(response.data.results);
+          // console.log("Trending");
+          // console.log(response.data);
           setStore({
             trending: response.data.results,
           });
@@ -32,30 +34,29 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error(error);
         }
       },
-      getMovies: async (page) => {
-        // if (page === undefined) {
-        //   page = 1;
-        // }
+      getMovies: async (page, genreIDs) => {
+        let store = getStore();
+        genreIDs = useGenre(store.filteredGenres);
         try {
           const response = await axios.get(
             `https://api.themoviedb.org/3/discover/movie?api_key=${
               import.meta.env.VITE_APP_API_KEY
-            }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
-            // &with_genres=${genreforURL}`
+            }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreIDs}`
           );
-          console.log("Movies");
-          console.log(response.data);
-          // console.log(page);
-          setStore({ movies: response.data.results });
+          // console.log(genreIDs);
+          // console.log("Movies");
+          // console.log(response.data);
+          // console.log(response.data.total_pages);
+          setStore({
+            movies: response.data.results,
+            total_pages: response.data.total_pages,
+          });
           return true;
         } catch (error) {
           console.error(error);
         }
       },
       getSeries: async (page) => {
-        // if (page === undefined) {
-        //   page = 1;
-        // }
         try {
           const response = await axios.get(
             `https://api.themoviedb.org/3/discover/tv?api_key=${
@@ -63,8 +64,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
             // &with_genres=${genreforURL}`
           );
-          console.log("Series");
-          console.log(response.data);
+          // console.log("Series");
+          // console.log(response.data);
           setStore({ series: response.data.results });
           return true;
         } catch (error) {
@@ -77,10 +78,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             `https://api.themoviedb.org/3/genre/movie/list?api_key=${
               import.meta.env.VITE_APP_API_KEY
             }&language=en-US`
+            //&with_genres=${genreIDs}
           );
-          console.log("Genres");
-          console.log(response.data);
-          // console.log(page);
+          // console.log("Movie Genres");
+          // console.log(response.data);
           setStore({ genres: response.data.genres });
           return true;
         } catch (error) {
@@ -93,14 +94,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({
           genres: store.genres.filter((item) => item.id !== genre.id),
         });
-        // console.log(store.genres);
-        console.log(
-          "addgenre",
-          "filtered",
-          store.filteredGenres,
-          "genres",
-          store.genres
-        );
       },
       removeGenre: (genre) => {
         const store = getStore();
@@ -110,14 +103,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             (filtered) => filtered.id !== genre.id
           ),
         });
-
-        console.log(
-          "removegenre",
-          "filtered",
-          store.filteredGenres,
-          "genres",
-          store.genres
-        );
       },
       filterSearch: (searchValue) => {
         let store = getStore();
@@ -145,7 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         console.log(store.filtered);
         setStore({
-          filtered: results,
+          content: [...results],
         });
       },
     },

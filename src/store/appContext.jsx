@@ -23,11 +23,7 @@ const injectContext = (PassedComponent) => {
       state.actions.getMovies();
       state.actions.getSeries();
       state.actions.getGenres();
-      //Dismounting component
-      return () => {
-        state.actions.getGenres({});
-      };
-    }, []);
+    }, [state.store.genres, state.store.filteredGenres]);
 
     return (
       <Context.Provider value={state}>

@@ -3,20 +3,11 @@ import Single from "../components/Single";
 import "./styles.css";
 import { Context } from "../store/appContext";
 import { Pagination } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 
 const Trending = () => {
   const { store, actions } = useContext(Context);
 
   const handlePagination = async (page) => {
-    // ref.current?.scrollIntoView({ behavior: "smooth" });
     window.scrollTo(0, 0);
     await actions.getTrending(page);
   };
@@ -45,8 +36,7 @@ const Trending = () => {
           marginTop: 10,
         }}
       >
-        <ThemeProvider theme={darkTheme}>
-          <CssBaseline />
+
           <Pagination
             color="primary"
             count={10}
@@ -54,7 +44,7 @@ const Trending = () => {
             hideNextButton
             hidePrevButton
           />
-        </ThemeProvider>
+
       </div>
     </div>
   );
