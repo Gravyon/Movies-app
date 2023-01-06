@@ -12,8 +12,6 @@ const Movies = () => {
     await actions.getMovies(page);
   };
 
-  useEffect(() => {}, [store.filteredGenres]);
-
   return (
     <div>
       <div className="pageTitle">Movies</div>

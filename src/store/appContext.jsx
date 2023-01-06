@@ -17,13 +17,12 @@ const injectContext = (PassedComponent) => {
           }),
       })
     );
-
     useEffect(() => {
       state.actions.getTrending();
       state.actions.getMovies();
       state.actions.getSeries();
       state.actions.getGenres();
-    }, [state.store.genres, state.store.filteredGenres]);
+    }, [state.store.filteredGenres]);
 
     return (
       <Context.Provider value={state}>

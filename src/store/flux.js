@@ -94,6 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({
           genres: store.genres.filter((item) => item.id !== genre.id),
         });
+        console.log("genres", store.genres, "filtrados", store.filteredGenres);
       },
       removeGenre: (genre) => {
         const store = getStore();
@@ -103,6 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             (filtered) => filtered.id !== genre.id
           ),
         });
+        console.log("genres", store.genres, "filtrados", store.filteredGenres);
       },
       filterSearch: (searchValue) => {
         let store = getStore();
