@@ -1,54 +1,68 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Single from "../components/Single";
 import "./styles.css";
-import { Context } from "../store/appContext";
+// import { Context } from "../store/appContext";
 import { Pagination } from "@mui/material";
-import Chip from "@mui/material/Chip";
+import Genres from "../components/Genres";
+import useGenre from "../hooks/useGenre";
+import axios from "axios";
 
-const Movies = () => {
-  const { store, actions } = useContext(Context);
-  const handlePagination = async (page) => {
+const Series = () => {
+  // const { store, actions } = useContext(Context);
+  const [genres, setGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [page, setPage] = useState(1);
+  const [content, setContent] = useState([]);
+  const [numOfPages, setNumOfPages] = useState();
+  const genreforURL = useGenre(selectedGenres);
+
+  const handlePagination = (page, numOfPages) => {
     window.scroll(0, 0);
-    await actions.getMovies(page);
+    setPage(page);
+    setNumOfPages(numOfPages);
   };
+
+  const fetchSeries = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${
+        import.meta.env.VITE_APP_API_KEY
+      }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
+    );
+    setContent(data.results);
+    console.log(data.total_pages);
+    if (data.total_pages.lentgh > 500) {
+      setNumOfPages(500);
+    } else {
+      setNumOfPages(data.total_pages);
+    }
+    // console.log(data);
+  };
+
+  useEffect(() => {
+    window.scroll(0, 0);
+    fetchSeries();
+  }, [genreforURL, page]);
 
   return (
     <div>
       <div className="pageTitle">Movies</div>
-      <div style={{ padding: "6px 0" }}>
-        {store.filteredGenres.map((genre) => (
-          <Chip
-            clickable
-            variant="deletable"
-            size="small"
-            key={genre.id}
-            label={genre.name}
-            style={{ margin: 2 }}
-            color="primary"
-            onDelete={() => actions.removeGenre(genre)}
-          />
-        ))}
-        {store.genres.map((genre) => (
-          <Chip
-            clickable
-            size="small"
-            variant="outlined"
-            key={genre.id}
-            label={genre.name}
-            style={{ margin: 2 }}
-            onClick={() => actions.addGenre(genre)}
-          />
-        ))}
-      </div>
+      <Genres
+        type="movie"
+        selectedGenres={selectedGenres}
+        setSelectedGenres={setSelectedGenres}
+        genres={genres}
+        setGenres={setGenres}
+        setPage={setPage}
+      />
       <div className="content">
-        {store.movies.map((single) => (
+        {content.map((single) => (
           <Single
             key={single.id}
             id={single.id}
             poster={single.poster_path}
-            title={single.title}
-            date={single.release_date}
-            media_type="Movie"
+            title={single.name}
+            date={single.first_air_date}
+            media_type={"movie"}
             vote_average={single.vote_average}
           />
         ))}
@@ -63,7 +77,8 @@ const Movies = () => {
         }}
       >
         <Pagination
-          count={store.total_pages}
+          count={numOfPages}
+          page={page}
           onChange={(e) => handlePagination(e.target.textContent)}
           hideNextButton
           hidePrevButton
@@ -73,4 +88,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default Series;

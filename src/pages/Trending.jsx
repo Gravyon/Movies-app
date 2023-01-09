@@ -25,6 +25,7 @@ const Trending = () => {
             date={single.first_air_date || single.release_date}
             media_type={single.media_type}
             vote_average={single.vote_average}
+            overview={single.overview}
           />
         ))}
       </div>
@@ -36,15 +37,13 @@ const Trending = () => {
           marginTop: 10,
         }}
       >
-
-          <Pagination
-            color="primary"
-            count={10}
-            onChange={(e) => handlePagination(e.target.textContent)}
-            hideNextButton
-            hidePrevButton
-          />
-
+        <Pagination
+          color="primary"
+          count={10}
+          onChange={(e) => handlePagination(e.target.textContent)}
+          hideNextButton
+          hidePrevButton
+        />
       </div>
     </div>
   );
