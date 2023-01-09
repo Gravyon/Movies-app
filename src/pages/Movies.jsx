@@ -7,8 +7,7 @@ import Genres from "../components/Genres";
 import useGenre from "../hooks/useGenre";
 import axios from "axios";
 
-const Series = () => {
-  // const { store, actions } = useContext(Context);
+const Movies = () => {
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(1);
@@ -22,7 +21,7 @@ const Series = () => {
     setNumOfPages(numOfPages);
   };
 
-  const fetchSeries = async () => {
+  const fetchMovies = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${
         import.meta.env.VITE_APP_API_KEY
@@ -35,12 +34,11 @@ const Series = () => {
     } else {
       setNumOfPages(data.total_pages);
     }
-    // console.log(data);
   };
 
   useEffect(() => {
     window.scroll(0, 0);
-    fetchSeries();
+    fetchMovies();
   }, [genreforURL, page]);
 
   return (
@@ -60,8 +58,8 @@ const Series = () => {
             key={single.id}
             id={single.id}
             poster={single.poster_path}
-            title={single.name}
-            date={single.first_air_date}
+            title={single.title}
+            date={single.release_date}
             media_type={"movie"}
             vote_average={single.vote_average}
           />
@@ -88,4 +86,4 @@ const Series = () => {
   );
 };
 
-export default Series;
+export default Movies;

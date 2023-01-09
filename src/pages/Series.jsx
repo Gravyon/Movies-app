@@ -8,7 +8,6 @@ import useGenre from "../hooks/useGenre";
 import axios from "axios";
 
 const Series = () => {
-  // const { store, actions } = useContext(Context);
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(1);
@@ -29,13 +28,7 @@ const Series = () => {
       }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     setContent(data.results);
-
-    if (data.total_pages > 500) {
-      data.total_pages = 500;
-      setNumOfPages(data.total_pages);
-    } else {
-      setNumOfPages(data.total_pages);
-    }
+    setNumOfPages(data.total_pages);
     // console.log(data);
   };
 
@@ -78,7 +71,6 @@ const Series = () => {
         }}
       >
         <Pagination
-          // count={500}
           count={numOfPages}
           page={page}
           onChange={(e) => handlePagination(e.target.textContent)}
