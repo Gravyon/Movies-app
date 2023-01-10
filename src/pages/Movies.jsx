@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Single from "../components/Single";
 import "./styles.css";
-// import { Context } from "../store/appContext";
 import { Pagination } from "@mui/material";
 import Genres from "../components/Genres";
 import useGenre from "../hooks/useGenre";
@@ -22,13 +21,13 @@ const Movies = () => {
   };
 
   const fetchMovies = async () => {
-    const { data } = await axios.get(
+    const response = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${
         import.meta.env.VITE_APP_API_KEY
       }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
-    setContent(data.results);
-    setNumOfPages(data.total_pages);
+    setContent(response.data.results);
+    setNumOfPages(response.data.total_pages);
     // console.log(data.total_pages);
   };
 

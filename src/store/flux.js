@@ -49,10 +49,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       //         import.meta.env.VITE_APP_API_KEY
       //       }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreIDs}`
       //     );
-      //     // console.log(genreIDs);
-      //     // console.log("Movies");
-      //     // console.log(response.data);
-      //     // console.log(response.data.total_pages);
+      // console.log(genreIDs);
+      // console.log("Movies");
+      // console.log(response.data);
+      // console.log(response.data.total_pages);
       //     setStore({
       //       movies: response.data.results,
       //       total_pages: response.data.total_pages,
@@ -68,10 +68,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       //       `https://api.themoviedb.org/3/discover/tv?api_key=${
       //         import.meta.env.VITE_APP_API_KEY
       //       }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
-      //       // &with_genres=${genreforURL}`
-      //     );
-      //     // console.log("Series");
-      //     // console.log(response.data);
+      // &with_genres=${genreforURL}`
+      // );
+      // console.log("Series");
+      // console.log(response.data);
       //     setStore({ series: response.data.results });
       //     return true;
       //   } catch (error) {
@@ -88,9 +88,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       //     console.log("Movie Genres");
       //     console.log(response.data);
       //     setStore({ genres: response.data.genres });
-      //     // const found = getStore().filteredGenres.some(
-      //     //   (r) => getStore().genres.indexOf(r) !== -1
-      //     // );
+      // const found = getStore().filteredGenres.some(
+      // (r) => getStore().genres.indexOf(r) !== -1
+      // );
       //     return true;
       //   } catch (error) {
       //     console.error(error);
@@ -124,35 +124,35 @@ const getState = ({ getStore, getActions, setStore }) => {
       //     store.filteredGenres
       //   );
       // },
-      filterSearch: (searchValue) => {
-        let store = getStore();
-        let content = store.content;
-        content = [store.trending, store.series, store.movies];
-        console.log(content);
-        let results = content.filter((item) => {
-          console.log(item);
-          if (
-            item.name
-              .toString()
-              .toLowerCase()
-              .includes(searchValue.toLowerCase()) ||
-            item.overview
-              .toString()
-              .toLowerCase()
-              .includes(searchValue.toLowerCase()) ||
-            item.title
-              .toString()
-              .toLowerCase()
-              .includes(searchValue.toLowerCase())
-          ) {
-            return item;
-          }
-        });
-        console.log(store.filtered);
-        setStore({
-          content: [...results],
-        });
-      },
+      // filterSearch: (searchValue) => {
+      //   let store = getStore();
+      //   let content = store.content;
+      //   content = [store.trending, store.series, store.movies];
+      //   console.log(content);
+      //   let results = content.filter((item) => {
+      //     console.log(item);
+      //     if (
+      //       item.name
+      //         .toString()
+      //         .toLowerCase()
+      //         .includes(searchValue.toLowerCase()) ||
+      //       item.overview
+      //         .toString()
+      //         .toLowerCase()
+      //         .includes(searchValue.toLowerCase()) ||
+      //       item.title
+      //         .toString()
+      //         .toLowerCase()
+      //         .includes(searchValue.toLowerCase())
+      //     ) {
+      //       return item;
+      //     }
+      //   });
+      //   console.log(store.filtered);
+      //   setStore({
+      //     content: [...results],
+      //   });
+      // },
     },
   };
 };

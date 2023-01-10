@@ -4,3 +4,9 @@
     justify-content: space-around;
     
 }
+/* Targets the rendered component after material ui is rendered */
+.MuiTabs-flexContainer {
+    display: flex;
+    justify-content: center;
+    /* width: 100%; */
+}
