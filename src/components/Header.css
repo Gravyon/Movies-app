@@ -15,6 +15,11 @@
 
 }
 
+.theme {
+    display: flex;
+    justify-content: end
+}
+
 /* responsive */
 
 @media (max-width: 1000px){

@@ -28,12 +28,8 @@ const Movies = () => {
       }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     setContent(data.results);
-    console.log(data.total_pages);
-    if (data.total_pages.lentgh > 500) {
-      setNumOfPages(500);
-    } else {
-      setNumOfPages(data.total_pages);
-    }
+    setNumOfPages(data.total_pages);
+    // console.log(data.total_pages);
   };
 
   useEffect(() => {
@@ -75,9 +71,9 @@ const Movies = () => {
         }}
       >
         <Pagination
-          count={numOfPages}
-          page={page}
           onChange={(e) => handlePagination(e.target.textContent)}
+          count={numOfPages > 500 ? setNumOfPages(500) : numOfPages}
+          page={Number(page)}
           hideNextButton
           hidePrevButton
         />

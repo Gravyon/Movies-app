@@ -71,9 +71,9 @@ const Series = () => {
         }}
       >
         <Pagination
-          count={numOfPages}
-          page={page}
           onChange={(e) => handlePagination(e.target.textContent)}
+          count={numOfPages > 500 ? setNumOfPages(500) : numOfPages}
+          page={Number(page)}
           hideNextButton
           hidePrevButton
         />

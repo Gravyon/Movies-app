@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import { Button, Tab, Tabs } from "@mui/material";
+import Single from "../components/Single";
 
 const Search = () => {
   const { store, actions } = useContext(Context);
@@ -52,7 +53,19 @@ const Search = () => {
         <Tab style={{ width: "50%" }} label="Search Movies" />
         <Tab style={{ width: "50%" }} label="Search TV Series" />
       </Tabs>
-      <div className="results"></div>
+      <div className="results">
+        {content.map((single) => (
+          <Single
+            key={single.id}
+            id={single.id}
+            poster={single.poster_path}
+            title={single.title}
+            date={single.release_date}
+            media_type={type ? "tv" : "movie"}
+            vote_average={single.vote_average}
+          />
+        ))}
+      </div>
     </div>
   );
 };
