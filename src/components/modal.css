@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+.modal_landscape {
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.modal_portrait{
+    display: none;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.tagline {
+    padding-bottom: 10px;
+    align-self: center;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* height: 100%; */
+    width: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.modal_about {
+    padding: 10px;
+    width: 95%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto", sans-serif;
+    justify-content: space-evenly;
+    font-weight: 300;
+}
+
+.modal_title {
+    height: 12%;
+    font-size: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.modal_description {
+    display: flex;
+    height: 40%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 5px black;
+    text-align: justify;
+    
+}
+@media (min-width: 835px) {
+    .modal_landscape{
+        display: none
+    }
+    .modal_portrait{
+        display: flex;
+        width:80%;
+    }
+    .modal {
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px 0 ;
+    }
+    .modal_about {
+        /* width: 58%; */
+        /* padding: 0; */
+        height: 100%;
+    }   
+    .modal_title {
+        font-size: 3.5vw;
+    }
+    .modal_description {
+        font-size: 22px;
+    }
+}
