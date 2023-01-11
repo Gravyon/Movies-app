@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+
 .modal_landscape {
     object-fit: contain;
     border-radius: 10px;
@@ -19,7 +20,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* height: 100%; */
+    height: 100%;
     width: 100%;
     overflow-y: scroll;
     scrollbar-width: none;
@@ -70,8 +71,8 @@
         padding: 10px 0 ;
     }
     .modal_about {
-        /* width: 58%; */
-        /* padding: 0; */
+        width: 58%;
+        padding: 0;
         height: 100%;
     }   
     .modal_title {

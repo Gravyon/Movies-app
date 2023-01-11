@@ -4,7 +4,9 @@ const Header = () => {
   return (
     <span onClick={() => window.scrollTo(0, 0)} className="header">
       Movies and series
-      <Button className="theme">Dark</Button>
+      <Button onClick={() => handleTheme} className="theme">
+        Dark
+      </Button>
     </span>
   );
 };

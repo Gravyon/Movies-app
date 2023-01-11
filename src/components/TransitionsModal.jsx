@@ -5,10 +5,10 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import "./single.css";
 import { img_500, unavailableLandscape, unavailable } from "../config/config";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import "./modal.css";
+import Carousel from "./Carousel";
 
 const style = {
   modal: {
@@ -39,7 +39,7 @@ export default function TransitionsModal({ children, media_type, id }) {
         import.meta.env.VITE_APP_API_KEY
       }&language=en-US`
     );
-    console.log(response.data);
+    // console.log(response.data);
     setContent(response.data);
     // console.log(content);
   };
@@ -50,7 +50,7 @@ export default function TransitionsModal({ children, media_type, id }) {
         import.meta.env.VITE_APP_API_KEY
       }&language=en-US`
     );
-    console.log(response.data);
+    // console.log(response.data);
     setVideo(response.data.results[0]?.key);
     // console.log(data.total_pages);
   };
@@ -111,18 +111,20 @@ export default function TransitionsModal({ children, media_type, id }) {
                   {content.tagline && (
                     <i className="tagline">{content.tagline}</i>
                   )}
+                  <div className="modal_description">{content.overview}</div>
+                  <div>
+                    <Carousel media_type={media_type} id={id} />
+                  </div>
+                  <Button
+                    variant="contained"
+                    startIcon={<YouTubeIcon />}
+                    color="secondary"
+                    target="__blank"
+                    href={`https://www.youtube.com/watch?v=${video}`}
+                  >
+                    Watch the trailer
+                  </Button>
                 </div>
-                <div className="modal_description">{content.overview}</div>
-                <div></div>
-                <Button
-                  variant="contained"
-                  startIcon={<YouTubeIcon />}
-                  color="secondary"
-                  target="__blank"
-                  href={`https://www.youtube.com/watch?v=${video}`}
-                >
-                  Watch the trailer
-                </Button>
               </div>
             </Box>
           )}
