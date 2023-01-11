@@ -21,7 +21,7 @@ const Search = () => {
           type ? "tv" : "movie"
         }?api_key=${VITE_APP_API_KEY}&language=en-US&&query=${search}&page=${page}&include_adult=false`
       );
-      console.log(response.data.results);
+      // console.log(response.data.results);
       setContent(response.data.results);
       setNumOfPages(data.total_pages);
     } catch (error) {
@@ -32,7 +32,6 @@ const Search = () => {
   useEffect(() => {
     window.scroll(0, 0);
     fetchSearch();
-    // eslint-disable-next-line
   }, [type, page]);
 
   return (
