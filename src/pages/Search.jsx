@@ -7,7 +7,7 @@ import { Pagination } from "@mui/material";
 import axios from "axios";
 
 const Search = () => {
-  // const API_KEY = import.meta.env.VITE_APP_API_KEY;
+  const VITE_APP_API_KEY = import.meta.env.VITE_APP_API_KEY;
   const [search, setSearch] = useState("");
   const [type, setType] = useState(0);
   const [page, setPage] = useState(1);
