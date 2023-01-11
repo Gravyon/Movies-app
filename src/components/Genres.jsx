@@ -1,7 +1,7 @@
 import { Chip } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
-const API_KEY = import.meta.env.VITE_APP_API_KEY;
+// const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 const Genres = ({
   selectedGenres,
@@ -14,7 +14,7 @@ const Genres = ({
   const fetchGenres = async () => {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/genre/${type}/list?api_key=${API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/genre/${type}/list?api_key=${VITE_APP_API_KEY}&language=en-US`
       );
       setGenres(response.data.genres);
       return true;

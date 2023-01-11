@@ -8,7 +8,7 @@ import useGenre from "../hooks/useGenre";
 import axios from "axios";
 
 const Series = () => {
-  const API_KEY = import.meta.env.VITE_APP_API_KEY;
+  // const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(1);
@@ -24,7 +24,7 @@ const Series = () => {
 
   const fetchSeries = async () => {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
+      `https://api.themoviedb.org/3/discover/tv?api_key=${VITE_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     setContent(response.data.results);
     setNumOfPages(response.data.total_pages);

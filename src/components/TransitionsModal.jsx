@@ -9,7 +9,7 @@ import { img_500, unavailableLandscape, unavailable } from "../config/config";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import "./modal.css";
 import Carousel from "./Carousel";
-const API_KEY = import.meta.env.VITE_APP_API_KEY;
+// const VITE_APP_API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 const style = {
   modal: {
@@ -36,7 +36,7 @@ export default function TransitionsModal({ children, media_type, id }) {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${VITE_APP_API_KEY}&language=en-US`
     );
     // console.log(response.data);
     setContent(response.data);
@@ -45,7 +45,7 @@ export default function TransitionsModal({ children, media_type, id }) {
 
   const fetchVideo = async () => {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${VITE_APP_API_KEY}&language=en-US`
     );
     // console.log(response.data);
     setVideo(response.data.results[0]?.key);

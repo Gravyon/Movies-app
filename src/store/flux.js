@@ -10,7 +10,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       genres: [],
       filteredGenres: [],
       total_pages: 0,
-      API_KEY: import.meta.env.VITE_APP_API_KEY,
     },
     actions: {
       getTrending: async (page) => {
@@ -20,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         try {
           const response = await axios.get(
-            `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}&page=${page}}`
+            `https://api.themoviedb.org/3/trending/all/day?api_key=${VITE_APP_API_KEY}&page=${page}}`
           );
           // console.log("Trending");
           // console.log(response.data);

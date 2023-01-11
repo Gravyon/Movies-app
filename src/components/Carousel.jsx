@@ -4,7 +4,7 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { img_300, noPicture } from "../config/config";
 import axios from "axios";
 import "./single.css";
-const API_KEY = import.meta.env.VITE_APP_API_KEY;
+// const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -40,7 +40,7 @@ const Carousel = ({ media_type, id }) => {
 
   const fetchCast = async () => {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=${VITE_APP_API_KEY}&language=en-US`
     );
     // console.log(response.data);
     // console.log(response.data.cast);
