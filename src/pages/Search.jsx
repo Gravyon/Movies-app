@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { Context } from "../store/appContext";
+import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import { Button, Tab, Tabs } from "@mui/material";
@@ -8,6 +7,7 @@ import { Pagination } from "@mui/material";
 import axios from "axios";
 
 const Search = () => {
+  const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const [search, setSearch] = useState("");
   const [type, setType] = useState(0);
   const [page, setPage] = useState(1);
@@ -17,9 +17,9 @@ const Search = () => {
   const fetchSearch = async () => {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
-          import.meta.env.VITE_APP_API_KEY
-        }&language=en-US&&query=${search}&page=${page}&include_adult=false`
+        `https://api.themoviedb.org/3/search/${
+          type ? "tv" : "movie"
+        }?api_key=${API_KEY}&language=en-US&&query=${search}&page=${page}&include_adult=false`
       );
       console.log(response.data.results);
       setContent(response.data.results);
@@ -44,7 +44,7 @@ const Search = () => {
       >
         <TextField
           style={{ flex: 1 }}
-          // onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           className="searchBox"
           variant="filled"
           placeholder="Search..."

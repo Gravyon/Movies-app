@@ -27,6 +27,7 @@ const style = {
 };
 
 export default function TransitionsModal({ children, media_type, id }) {
+  const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,9 +36,7 @@ export default function TransitionsModal({ children, media_type, id }) {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${
-        import.meta.env.VITE_APP_API_KEY
-      }&language=en-US`
+      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${API_KEY}&language=en-US`
     );
     // console.log(response.data);
     setContent(response.data);
@@ -46,9 +45,7 @@ export default function TransitionsModal({ children, media_type, id }) {
 
   const fetchVideo = async () => {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${
-        import.meta.env.VITE_APP_API_KEY
-      }&language=en-US`
+      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${API_KEY}&language=en-US`
     );
     // console.log(response.data);
     setVideo(response.data.results[0]?.key);
@@ -64,7 +61,7 @@ export default function TransitionsModal({ children, media_type, id }) {
     <>
       <div
         className="card_content"
-        style={{ cursor: "pointer", width: "17.5rem" }}
+        style={{ cursor: "pointer", width: "13rem" }}
         color="inherit"
         onClick={handleOpen}
       >

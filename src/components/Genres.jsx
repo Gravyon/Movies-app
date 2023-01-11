@@ -10,12 +10,11 @@ const Genres = ({
   type,
   setPage,
 }) => {
+  const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const fetchGenres = async () => {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/genre/${type}/list?api_key=${
-          import.meta.env.VITE_APP_API_KEY
-        }&language=en-US`
+        `https://api.themoviedb.org/3/genre/${type}/list?api_key=${API_KEY}&language=en-US`
       );
       setGenres(response.data.genres);
       return true;

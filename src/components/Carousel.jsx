@@ -8,6 +8,7 @@ import "./single.css";
 const handleDragStart = (e) => e.preventDefault();
 
 const Carousel = ({ media_type, id }) => {
+  const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const [cast, setCast] = useState([]);
 
   const responsive = {
@@ -39,15 +40,13 @@ const Carousel = ({ media_type, id }) => {
 
   const fetchCast = async () => {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=${
-        import.meta.env.VITE_APP_API_KEY
-      }&language=en-US`
+      `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=${API_KEY}&language=en-US`
     );
     // console.log(response.data);
-    console.log(response.data.cast);
+    // console.log(response.data.cast);
     setCast(response.data.cast);
     // dataCast = response.data.cast;
-    console.log("usestate", cast);
+    // console.log("usestate", cast);
     // console.log(cast);
   };
 
