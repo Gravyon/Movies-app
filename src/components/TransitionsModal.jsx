@@ -9,6 +9,7 @@ import { img_500, unavailableLandscape, unavailable } from "../config/config";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import "./modal.css";
 import Carousel from "./Carousel";
+const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 const style = {
   modal: {
@@ -27,7 +28,6 @@ const style = {
 };
 
 export default function TransitionsModal({ children, media_type, id }) {
-  const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

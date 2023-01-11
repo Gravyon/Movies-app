@@ -10,10 +10,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       genres: [],
       filteredGenres: [],
       total_pages: 0,
+      API_KEY: import.meta.env.VITE_APP_API_KEY,
     },
     actions: {
       getTrending: async (page) => {
-        const API_KEY = import.meta.env.VITE_APP_API_KEY;
+        // const API_KEY = import.meta.env.VITE_APP_API_KEY;
         if (page === undefined) {
           page = 1;
         }
