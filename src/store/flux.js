@@ -10,6 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       genres: [],
       filteredGenres: [],
       total_pages: 0,
+
+      // API_KEY: import.meta.env.VITE_APP_API_KEY,
     },
     actions: {
       getTrending: async (page) => {
