@@ -10,7 +10,7 @@ const Single = ({ id, poster, title, date, media_type, vote_average }) => {
       media_type={media_type}
       id={id}
       key={id}
-      style={{ width: "18rem" }}
+      
     >
       <Badge
         badgeContent={

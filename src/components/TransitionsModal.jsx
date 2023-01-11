@@ -64,7 +64,7 @@ export default function TransitionsModal({ children, media_type, id }) {
     <>
       <div
         className="card_content"
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", width: "17.5rem" }}
         color="inherit"
         onClick={handleOpen}
       >
