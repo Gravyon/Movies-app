@@ -8,7 +8,7 @@ import useGenre from "../hooks/useGenre";
 import axios from "axios";
 
 const Series = () => {
-  const API_KEY = import.meta.env.VITE_APP_API_KEY;
+  // const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(1);

@@ -1,7 +1,7 @@
 import { Chip } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
-const API_KEY = import.meta.env.VITE_APP_API_KEY;
+// const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 const Genres = ({
   selectedGenres,

@@ -4,7 +4,7 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { img_300, noPicture } from "../config/config";
 import axios from "axios";
 import "./single.css";
-const API_KEY = import.meta.env.VITE_APP_API_KEY;
+// const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 const handleDragStart = (e) => e.preventDefault();
 
