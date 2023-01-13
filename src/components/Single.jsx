@@ -6,12 +6,7 @@ import TransitionsModal from "./TransitionsModal";
 
 const Single = ({ id, poster, title, date, media_type, vote_average }) => {
   return (
-    <TransitionsModal
-      media_type={media_type}
-      id={id}
-      key={id}
-      
-    >
+    <TransitionsModal media_type={media_type} id={id} key={id}>
       <Badge
         badgeContent={
           vote_average > 0 ? vote_average.toString().slice(0, 3) : "1"

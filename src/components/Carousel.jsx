@@ -4,13 +4,13 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { img_300, noPicture } from "../config/config";
 import axios from "axios";
 import "./single.css";
+import { Link } from "react-router-dom";
 
 const handleDragStart = (e) => e.preventDefault();
 
 const Carousel = ({ media_type, id }) => {
   const VITE_APP_API_KEY = import.meta.env.VITE_APP_API_KEY;
   const [cast, setCast] = useState([]);
-
   const responsive = {
     //handling resolution pixels
     0: {
@@ -25,7 +25,11 @@ const Carousel = ({ media_type, id }) => {
   };
 
   const items = cast.map((actor) => (
-    <div className="cast">
+    <a
+      target="__blank"
+      href={`https://www.themoviedb.org/person/${actor.id}`}
+      className="cast"
+    >
       <img
         onDragStart={handleDragStart}
         className="cast_img"
@@ -35,7 +39,7 @@ const Carousel = ({ media_type, id }) => {
         }
       />
       <b>{actor.name}</b>
-    </div>
+    </a>
   ));
 
   const fetchCast = async () => {
